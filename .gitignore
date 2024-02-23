@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.angular/cache/17.1.2
+/.vs
+/.vscode
+/node_modules

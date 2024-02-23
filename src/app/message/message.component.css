@@ -1,0 +1,277 @@
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 98vh;
+}
+
+.message-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+  overflow-y: auto;
+  max-height: 80vh;
+  scrollbar-width: thin;
+  scroll-behavior: inherit;
+}
+
+.user-bubble {
+  --bubble-background: lightblue;
+  background-color: var(--bubble-background);
+  display: flex;
+  font-size: small;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  text-align: right;
+  align-self: flex-end;
+} 
+
+.assistant-bubble {
+  --bubble-background: pink;
+  background-color: var(--bubble-background);
+  display: flex;
+  font-size: small;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  text-align: left;
+  align-self: flex-start; 
+}
+
+.tool-bubble {
+  --bubble-background: magenta;
+  background-color: var(--bubble-background);
+  display: inline-flexbox;
+  font-size: small;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  text-align: center;
+}
+
+.system-bubble {
+  --bubble-background: red;
+  background-color: var(--bubble-background);
+  display: inline-flexbox;
+  font-size: small;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  text-align: center;
+}
+
+.typing-bubble {
+  --bubble-background: pink;
+  background-color: var(--bubble-background);
+  display: flex;
+  font-size: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  text-align: left;
+  align-self: flex-start; 
+}
+
+.last-message {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;   
+    background-color: transparent; 
+  }
+  to {
+    opacity: 1;
+    background-color: var(--bubble-background);
+  }
+}
+
+.new-message-container {
+  display: flex;
+  bottom: 1;
+  max-height: 20vh;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+textarea {
+  resize: none;
+  font-size: small;
+  font-family:  Calibri;
+  flex: 1;
+  padding: 5px;
+  height: calc(16vh - 8px);
+  margin: 5px;
+  border-radius: 10px;
+}
+
+button {
+  margin: 2px;
+  font-size: medium;
+  height: 8vh;
+  width: 8vh;
+  background-color: #007bff;
+  color: #ffffff;
+  border: #0056b3;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.scroll-to-new-button {
+  position: absolute;
+  bottom: 19.5vh;
+  left: 11px;
+  z-index: 1; 
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.microphone-button {
+  background-color: red;
+}
+
+.microphone-button:hover {
+  background-color: darkred;
+}
+
+.microphone-button.recording {
+  background-color: green;
+}
+.microphone-button.recording:hover {
+  background-color: darkgreen;
+}
+
+.typing-animation p {
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  height: 4px;
+  width: 4px;
+  background-color: #000000;
+  padding: 1px;
+  border-radius: 10px;
+  margin: 4px;
+  animation: typingDots 0.8s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingDots {
+  0%, 20% {
+    transform: translateY(0);
+  }
+  40%, 60% {
+    transform: translateY(-5px);
+  }
+  80%, 100% {
+    transform: translateY(0);
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  backdrop-filter: blur(3px);
+  z-index: 999;
+}
+
+.fade-out {
+  animation: fadeOutOverlay 2s forwards;
+}
+
+@keyframes fadeOutOverlay {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(169, 169, 169, 0.5);
+  z-index: 1000;
+
+}
+.login-container-fade-out {
+  animation: fadeOutModalContainer 2s forwards;
+}
+
+@keyframes fadeOutModalContainer {
+  from {
+    background-color: rgba(169, 169, 169, 0.5);
+  }
+  to {
+    background-color: transparent;
+    display: none;
+  }
+}
+
+.login-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1000;
+}
+
+img {
+  max-width: 100%;
+  max-height: 20vh;
+}
+
+input {
+  width: 100%; 
+  font-family: Calibri;
+  padding: 10px;
+  margin: 10px 0; 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+
+.error {
+  background-color: lightsalmon;
+}
+
+.login-button {
+  width: 100%;
+  background-color: limegreen;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box; 
+}
+.login-button:hover {
+  background-color: green;
+}
