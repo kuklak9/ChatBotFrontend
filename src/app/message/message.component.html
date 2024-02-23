@@ -1,0 +1,60 @@
+<div [ngClass]="{'overlay': true, 'fade-out': isLoginSuccessful}"></div>
+<div [ngClass]="{'login-container': true, 'login-container-fade-out': isLoginSuccessful}">
+  <div class="login-content" *ngIf="isLoginPopupOpen">
+    <img src="assets/images/Logo.png" alt="Baumalog Logo" />
+    <form>
+      <input type="text" [(ngModel)]="loginInput" name="loginInput" placeholder="Użytkownik">
+      <input type="password" [(ngModel)]="passwordInput" name="passwordInput" placeholder="Hasło" [class.error]="isLoginError" (click)="passwordBackgroundReset()">
+      <button type="button" class="login-button"  (click)="loginToApp()">Zaloguj</button>
+    </form>
+  </div>
+</div>
+<div class="chat-window">
+  <div class="message-container" #messageContainer (scroll)="onScroll()">
+    <div *ngFor="let message of allMessages; let last = last" [ngClass]="{
+      'last-message': last,
+      'user-bubble': isUserMessage(message),
+      'assistant-bubble': isAssistantMessage(message),
+      'tool-bubble': isToolMessage(message),
+      'system-bubble': isSystemMessage(message)}"
+      (click)="readMessage(message.message)">
+       <div class="message-bubble">
+         <p>{{ message.message }}</p>
+       </div>
+     </div> 
+    <div *ngIf="isTyping" class="typing-bubble typing-animation">
+      <div class="message-bubble">
+        <p>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </p>
+      </div>
+    </div>
+  <button *ngIf="showScrollButton" class="scroll-to-new-button" (click)="scrollToBottom()">
+    <fa-icon [icon]='iconSkipToNew'></fa-icon>
+  </button>
+  </div>
+  <div class="new-message-container">
+    <textarea (keydown.enter)="sendMessage()" [(ngModel)]="newMessage" placeholder="Wpisz wiadomość"></textarea>   
+    <div>
+      <div class="button-row">
+        <button class="microphone-button" [ngClass]="{'recording': isRecording}" (click)="startListening()">
+          <fa-icon [icon]='iconMicrophone'></fa-icon>
+        </button>
+        <button (click)="sendMessage()">
+          <fa-icon [icon]='iconSend'></fa-icon>
+        </button>
+      </div>
+      <div class="button-row">
+        <button (click)="clearTextarea()">
+          <fa-icon [icon]='iconClear'></fa-icon>
+        </button>
+        <button (click)="newChat()">
+          <fa-icon [icon]='iconNew'></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
